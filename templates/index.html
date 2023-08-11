@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Parkinson's Disease Prediction</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: white;
+    }
+    
+    .container {
+      background-color: #292b2c;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    h1 {
+      color: #ffffff;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+    
+    h2 {
+      color: #17a2b8;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+    
+    input[type="file"], input[type="submit"] {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      border: none;
+      background-color: #17a2b8;
+      color: white;
+      cursor: pointer;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: #138496;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Parkinson's Disease Prediction</h1>
+    <!-- ... (other HTML code) ... -->
+    <form action="/predict" method="post" enctype="multipart/form-data">
+      <label for="image-input">Upload your squiral hand-written image</label>
+      <input type="file" name="image" accept="image/*" id="image-input">
+      <input type="submit" value="Upload" id="upload-button">
+    </form>
+<!-- ... (other HTML code) ... -->
+
+
+    <!-- ... (other HTML code) ... -->
+    <div id="image-preview" style="display: none;">
+      <img src="" id="preview-image" alt="Uploaded Image">
+    </div>
+
+    {% if prediction_text %}
+      <h2 id="prediction-text">{{ prediction_text }}</h2>
+      
+    {% endif %}
+<!-- ... (other HTML code) ... -->
+
+  </div>
+
+  <script>
+    // JavaScript code for image preview
+    const imageInput = document.getElementById('image-input');
+    const imagePreview = document.getElementById('image-preview');
+    const previewImage = document.getElementById('preview-image');
+    const predictionText = document.getElementById('prediction-text');
+
+    imageInput.addEventListener('change', function(event) {
+      const selectedFile = event.target.files[0];
+      if (selectedFile) {
+        imagePreview.style.display = 'block';
+        previewImage.src = URL.createObjectURL(selectedFile);
+      } else {
+        imagePreview.style.display = 'none';
+        previewImage.src = '';
+      }
+    });
+  </script>
+</body>
+</html>
